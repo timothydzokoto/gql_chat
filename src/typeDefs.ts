@@ -84,6 +84,7 @@ export const typeDefs = gql`
 
   type Mutation {
     addPost(title: String, body: String!, url: String): Post!
+    updatePost(id: Int!, title: String!, body: String!, url: String!): Post!
     likePost(postId: Int!): Post!
     signup(name: String!, email: String!, password: String!): AuthPayload!
     login(email: String!, password: String!): AuthPayload

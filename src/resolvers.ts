@@ -12,7 +12,11 @@ export const resolvers = {
       });
     },
     allPosts: async (_, args, context) => {
-      return await context.prisma.post.findMany();
+      return await context.prisma.post.findMany({
+        include: {
+          author: true,
+        },
+      });
     },
     post: async (_, args, context) => {},
     allMessages: async (_, args, context) => {
@@ -87,6 +91,23 @@ export const resolvers = {
         },
       });
       return post;
+    },
+
+    // UPDATE POST
+    updatePost: async (_, args, context) => {
+      const { id, title, body, url } = args;
+
+    
+      const newPost = context.prisma.post.update({
+        where: { id },
+        data: {
+          title,
+          body,
+          url,
+        },
+      });
+
+      return newPost;
     },
   },
 };

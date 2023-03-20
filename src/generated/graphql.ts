@@ -65,6 +65,7 @@ export type Mutation = {
   likePost: Post;
   login?: Maybe<AuthPayload>;
   signup: AuthPayload;
+  updatePost: Post;
 };
 
 
@@ -90,6 +91,14 @@ export type MutationSignupArgs = {
   email: Scalars['String'];
   name: Scalars['String'];
   password: Scalars['String'];
+};
+
+
+export type MutationUpdatePostArgs = {
+  body: Scalars['String'];
+  id: Scalars['Int'];
+  title: Scalars['String'];
+  url: Scalars['String'];
 };
 
 export type Post = {
@@ -288,6 +297,7 @@ export type MutationResolvers<ContextType = Context, ParentType extends Resolver
   likePost?: Resolver<ResolversTypes['Post'], ParentType, ContextType, RequireFields<MutationLikePostArgs, 'postId'>>;
   login?: Resolver<Maybe<ResolversTypes['AuthPayload']>, ParentType, ContextType, RequireFields<MutationLoginArgs, 'email' | 'password'>>;
   signup?: Resolver<ResolversTypes['AuthPayload'], ParentType, ContextType, RequireFields<MutationSignupArgs, 'email' | 'name' | 'password'>>;
+  updatePost?: Resolver<ResolversTypes['Post'], ParentType, ContextType, RequireFields<MutationUpdatePostArgs, 'body' | 'id' | 'title' | 'url'>>;
 }>;
 
 export type PostResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Post'] = ResolversParentTypes['Post']> = ResolversObject<{
